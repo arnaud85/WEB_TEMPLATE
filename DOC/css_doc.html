@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Help CSS</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+	<div class="container">
+
+		<h1>HELP CSS</h1>
+
+		<h2>Classes, sélecteurs et règles</h2>
+
+		<p>Le fichier CSS va donner le <strong>style</strong> de la page web.</p>
+
+		<p>On sélectionne un objet grâce à son <strong>sélecteur</strong>, c'est-à-dire le nom de sa <strong>classe</strong> précédé d'un point <strong>.objet</strong>, et on lui applique les <strong>règles</strong> voulues.</p>
+
+		<p class="warning">Il ne faut jamais utiliser les <em>ID</em> pour sélectionner les objets que l'on veut modifier : ceux-ci sont réservés pour les animations avec <em>Javascript</em> !</p>
+
+		<h2>Conventions d'écriture des règles CSS</h2>
+
+		<p>Pour écrire les règles qui vont s'appliquer à un objet, on procèdera de la manière suivante :
+			<ul>
+				<li>On ouvre la parenthèse ouvrante sur la même ligne que le sélecteur</li>
+				<li>On laisse un espace entre le sélecteur et la parenthèse ouvrante</li>
+				<li>On ferme la parenthèse fermante sur une ligne à part à la fin des règles</li>
+			</ul>
+		</p>
+
+		<p>De plus, on procèdera toujours dans le même ordre, de l'extérieur vers le plus interne, suivant le modèle de boite suivant :
+		<ul>
+			<li><strong>BOX</strong>  : les dimensions intrinsèques de l'argument</li>
+			<li><strong>BORDER</strong> : les bordures de l'argument</li>
+			<li><strong>BACKGROUND</strong> : le fond de l'argument</li>
+			<li><strong>TEXT</strong> : Le style du texte</li>
+			<li><strong>OTHER</strong> : tout ce que l'on ne peut pas mettre ailleurs!</li>
+		</ul>
+		</p>
+
+		<p>Enfin, on saute une ligne entre chaque groupe de règles.</p>
+	
+		<p>Et hop, un petit exemple :</p>
+
+		<img src="regles.png" alt="Exemple d'écriture de règles">
+		
+		<h2>Conventions d'écriture des classes CSS</h2>
+
+		<p>On crée ainsi des classes pour chaque éléments de la structure HTML afin de styliser le tout d'une façon optimale.</p>
+
+		<p>Les classes doivent être crées ainsi :
+			<ul>
+				<li>Un classe générique</li>
+				<li>Une classe spécialisant l'objet</li>
+			</ul>
+		</p>
+
+		<p>Par exemple, pour une barre de navigation horizontale, on créera les classes :
+			<ul>
+				<li><em>.navbar</em></li>
+				<li><em>.navbar-horizontal</em></li>
+			</ul>
+		</p>
+
+		<img src="class.png" alt="Exemple d'utilisation d'une classe CSS">
+
+		<p>Enfin, on distinguera les différentes briques de la page web selon la méthode <strong>SMACSS</strong> exposé ci-dessous :</p>
+		
+		<img src="SMACSS.png" alt="Methode SMACSS">
+
+	</div>
+
+</body>
+
+</html>
