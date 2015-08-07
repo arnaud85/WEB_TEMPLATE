@@ -1,60 +1,58 @@
 // LOCAL VARIABLES
 var gulp = require('gulp');
-var gulpLoadPlugins = require('gulp-load-plugins');
-var plugins = gulpLoadPlugins();
-
-// SERVER & LIVERELOAD
-gulp.task('connect', function() {
-	
-	const connect = require('connect');
-	const serveStatic = require('serve-static');
-	const serveIndex = require('serve-index');
-
-	const app = connect()
-	.use(require('connect-livereload')({ port: 35729 }))
-	.use(serveStatic('./'))
-	.use(serveIndex('./'));
-
-	require('http').createServer(app).listen(8080);
-});
+var sass = require('gulp-sass');
+var browserSync = require('browser-sync').create();
 
 
 // FOLDERS
-const baseFolder = {
-  dev  : './',
-  dist : './'
+const roots = {
+  
+    base: "./" ,
+    dev  : 'dev/',
+    dist : 'dist/'
+
 };
 
 const devFolder = {
-  sass  : baseFolder.dev + 'sass/',
-  js : baseFolder.dev + 'js/',
-  img  : baseFolder.dev + 'img/'
+  
+    sass  : roots.dev + 'sass/',
+    js : roots.dev + 'js/',
+    img  : roots.dev + 'img/'
+
 };
 
 const distFolder = {
-  css  : baseFolder.dist + 'css/',
-  js : baseFolder.dist + 'js/',
-  img  : baseFolder.dist + 'img/'
+  
+    css  : roots.dist + 'css/',
+    js : roots.dist + 'js/',
+    img  : roots.dist + 'img/'
+
 };
 
-
-// STYLES
-gulp.task('styles', function() {
-
-	return gulp.src(devFolder.sass + '**/*.scss')
-		.pipe(plugins.sass())
-		.pipe(gulp.dest(distFolder.css));
-});
-
-
-// WATCH
+// WATCH FOR CHANGES IN HTML FILES
 gulp.task('watch', function () {
 
-  plugins.livereload.listen();
+    browserSync.init({
+        
+        server: {
+        	
+        	baseDir: roots.base
+        }
 
-  gulp.watch([distFolder.css + '**/*.css']).on('change', plugins.livereload.changed);
+    });
+
+    gulp.watch(devFolder.sass + "*.scss", ['sass']);
+
+    gulp.watch(roots.base + "*.html").on("change", browserSync.reload);
 });
 
+// SASS -> CSS
+gulp.task('sass', function() {
+    
+    return gulp.src(devFolder.sass + "*.scss")
+    	.pipe(sass())
+        .pipe(gulp.dest(distFolder.css))
+        .pipe(browserSync.stream());
+});
 
-// MAIN
-gulp.task('default', ['styles', 'connect', 'watch']);
+gulp.task('default', ['watch']);
